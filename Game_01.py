@@ -1,5 +1,8 @@
 from tkinter import *
 import random
+import time
+from tkinter import messagebox as mb
+
 
 def move_ball(event):
     key = event.keysym
@@ -17,14 +20,36 @@ def move_ball(event):
 
 def check_collision():
     b = canvas.coords(ball)
-    print(b)
     s = canvas.coords(square)
-    print(s)
     if b[2] > s[0] and b[0] < s[2] and b[3] > s[1] and b[1] < s[3]:
         if b[0] < s[2]:
-            print(f'b[0] < s[2]: {b[0] < s[2]}')
+            move_square()
+            update_score()
+
+
+def update_score():
+    global score, start_time
+    score += 1
+    score_label.config(text=f'Счет: {score}')
+    if score >= 10:
+        end_time = time.time()
+        t = end_time - start_time
+        if t < 20:
+            mb.showinfo('Игра окончена!', f'Победа! Вы прошли игру за {t:.1f} сек.')
+        else:
+            mb.showinfo('Вы проиграли','Вы не успели! Время вышло')
+        if mb.askyesno('Игра окончена!', 'Хотите сыграть еще раз?'):
+            start_game()
+        else:
+            window.destroy()
+
+
+def start_game():
+    global score, start_time
+    score = 0
+    score_label.config(text=f'Счет: {score}')
+    start_time = time.time()
     move_square()
-    update_score()
 
 
 def move_square():
@@ -35,7 +60,7 @@ def move_square():
 
 window = Tk()
 window.title('Игра с шариком')
-window.geometry('400x300')
+window.geometry('400x330')
 
 canvas = Canvas(width=400, height=300)
 canvas.pack()
@@ -44,6 +69,10 @@ ball = canvas.create_oval(180, 180, 220, 220, fill='red')
 square = canvas.create_rectangle(150, 150, 170, 170, fill='blue')
 
 score = 0
+start_time = time.time()
+
+score_label = Label(text=f'Счет: {score}')
+score_label.pack()
 
 window.bind('<KeyPress>', move_ball)
 window.focus_set()
