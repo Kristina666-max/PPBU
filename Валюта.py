@@ -8,7 +8,6 @@ import pprint
 
 def update_currency_label(event):
     code = target_combobox.get()
-    # code = combobox.get()
     name = currencies[code]
     target_label.config(text=name)
 
@@ -29,8 +28,6 @@ def exchange():
     target_code = target_combobox.get().strip()
     base_code = base_combobox.get().strip()
     base_code_2 = base_combobox_2.get().strip()
-    # code = entry.get().upper().strip()
-    # code = combobox.get()
     if target_code and base_code and base_code_2:
         try:
 
@@ -46,7 +43,6 @@ def exchange():
                 base = currencies[base_code]
                 base_2 = currencies[base_code_2]
                 target = currencies[target_code]
-                # currency_name = currencies[code]
                 mb.showinfo('Курс обмена',
                             f'Курс: {exchange_rate:.1f} {target} за 1 {base} и {exchange_2_rate:.1f} {target} за 1 {base_2}')
             else:
@@ -93,22 +89,15 @@ base_label_2 = ttk.Label()
 base_label_2.pack(pady=10)
 
 Label(root, text='Целевая валюта').pack(pady=10)
-# popular_currencies = ['EUR', 'JPY', 'GBP', 'AUD', 'CAD', 'CHF',
-#                       'CNY', 'RUB', 'KZT', 'UZS']
 target_combobox = ttk.Combobox(root, values=list(currencies.keys()))
 target_combobox.pack(pady=10)
 target_combobox.bind('<<ComboboxSelected>>', update_currency_label)
 
 target_label = ttk.Label()
 target_label.pack(pady=10)
-# entry = Entry(root)
-# entry.pack()
 
 Button(text='Получить курс обмена к доллару',
        command=exchange).pack(pady=10)
 
+
 root.mainloop()
-# p = pprint.PrettyPrinter(indent=4)
-# result = requests.get('https://open.er-api.com/v6/latest/USD')
-# data = json.loads(result.text)
-# p.pprint(data)
