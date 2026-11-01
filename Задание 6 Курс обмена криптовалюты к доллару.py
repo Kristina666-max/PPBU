@@ -28,6 +28,7 @@ def exchange():
         except Exception as er:
             mb.showerror('Ошибка', er)
 
+
 currencies = {
     'Bitcoin': 'bitcoin',
     'Ethereum': 'ethereum',
