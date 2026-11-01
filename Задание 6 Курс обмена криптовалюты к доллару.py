@@ -4,22 +4,10 @@ from tkinter import ttk
 import requests
 
 
-def update_currency_label(event):
-    code = target_combobox.get()
-    name = currencies[code]
-    target_label.config(text=name)
-
-
 def update_base_label(event):
     code = base_combobox.get()
     name = currencies[code]
     base_label.config(text=name)
-
-
-def update_base_label_2(event):
-    code_2 = base_combobox_2.get()
-    name_2 = currencies[code_2]
-    base_label_2.config(text=name_2)
 
 
 def exchange():
