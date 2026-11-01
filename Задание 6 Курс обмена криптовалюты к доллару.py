@@ -54,17 +54,16 @@ def exchange():
 
 
 currencies = {
-    'EUR': 'Евро',
-    'USD': 'Американский доллар',
-    'JPY': 'Японская йена',
-    'GBP': 'Фунт стерлингов',
-    'AUD': 'Австралийский доллар',
-    'CAD': 'Канадский доллар',
-    'CHF': 'Швейцарский франк',
-    'CNY': 'Китайский юань',
-    'RUB': 'Российский рубль',
-    'KZT': 'Казахстанский тенге',
-    'UZS': 'Узбекский сум'
+    'Bitcoin': 'bitcoin',
+    'Ethereum': 'ethereum',
+    'Tether': 'tether',
+    'Binance Coin': 'binancecoin',
+    'XRP': 'ripple',
+    'USD Coin': 'usd-coin',
+    'Solana': 'solana',
+    'TRON': 'tron',
+    'Cardano': 'cardano',
+    'Hyperliquid': 'hyperliquid'
 
 }
 
