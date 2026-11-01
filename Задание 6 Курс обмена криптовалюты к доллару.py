@@ -11,35 +11,22 @@ def update_base_label(event):
 
 
 def exchange():
-    target_code = target_combobox.get().strip()
     base_code = base_combobox.get().strip()
-    base_code_2 = base_combobox_2.get().strip()
-    if target_code and base_code and base_code_2:
+    coin = currencies[base_code]
+    if base_code:
         try:
-
-            response = requests.get(f'https://open.er-api.com/v6/latest/{base_code}')
-            response_2 = requests.get(f'https://open.er-api.com/v6/latest/{base_code_2}')
+            url = f'https://api.coingecko.com/api/v3/simple/price?ids={coin}&vs_currencies=usd'
+            response = requests.get(url)
             response.raise_for_status()
-            response_2.raise_for_status()
             data = response.json()
-            data_2 = response_2.json()
-            if target_code in data['rates'] and target_code in data_2['rates']:
-                exchange_rate = data['rates'][target_code]
-                exchange_2_rate = data_2['rates'][target_code]
-                base = currencies[base_code]
-                base_2 = currencies[base_code_2]
-                target = currencies[target_code]
-                mb.showinfo('Курс обмена',
-                            f'Курс: {exchange_rate:.1f} {target} за 1 {base} и {exchange_2_rate:.1f} {target} за 1 {base_2}')
+            if coin in data and 'usd' in data[coin] :
+                exchange_rate = data[coin]['usd']
+                base = base_code
+                mb.showinfo('Курс обмена',f'Курс: {exchange_rate:.1f} USD за 1 {base}')
             else:
-                mb.showerror('Ошибка',
-                             f'Валюта {target_code} не найдена')
+                mb.showerror('Ошибка',f'Не удалось получить курс для {base_code}')
         except Exception as er:
             mb.showerror('Ошибка', er)
-
-    else:
-        mb.showwarning('Внимание', 'Введите код валюты')
-
 
 currencies = {
     'Bitcoin': 'bitcoin',
