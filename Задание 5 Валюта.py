@@ -69,7 +69,7 @@ currencies = {
 }
 
 root = Tk()
-root.title('Курс обмена валют USD')
+root.title('Курс обмена валют')
 root.geometry('360x400')
 
 Label(root, text='Базовая валюта').pack(pady=10)
@@ -94,7 +94,7 @@ target_combobox.bind('<<ComboboxSelected>>', update_currency_label)
 target_label = ttk.Label()
 target_label.pack(pady=10)
 
-Button(text='Получить курс обмена к доллару',
+Button(text='Получить курс обмена',
        command=exchange).pack(pady=10)
 
 
